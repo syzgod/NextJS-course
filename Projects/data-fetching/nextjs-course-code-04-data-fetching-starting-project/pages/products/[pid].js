@@ -32,6 +32,10 @@ export const getStaticProps = async (context) => {
 
   const product = data.products.find((product) => product.id === productId);
 
+  if (!product) {
+    return { notFound: true };
+  }
+
   return {
     props: {
       loadedProduct: product,
@@ -47,7 +51,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: pathWithParams,
-    fallback: false,
+    fallback: true,
   };
 };
 
